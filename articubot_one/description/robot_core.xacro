@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+<xacro:include filename="inertial_macros.xacro" />
+
+  <!-- Materials -->
+  <material name="Steel Blue">
+    <color rgba="0.27 0.51 0.71 1" />
+  </material>
+
+  <material name="soft blue">
+    <color rgba="0.68 0.85 0.9 1" />
+  </material>
+
+  <material name="Pastel Pink">
+    <color rgba="1 0.71 0.76 1" />
+  </material>
+
+  <material name="Lavender Purple">
+    <color rgba="0.73 0.56 0.96 1" />
+  </material>
+
+  <material name="yellow">
+    <color rgba="1 1 0 1" />
+  </material>
+
+  <!-- BASE LINK -->
+  <link name="base_link">
+  </link>
+
+  <!-- Chassis -->
+  <joint name="chassis_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="chassis"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="chassis">
+    <visual>
+      <origin xyz="0 0 0.1" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.5 0.9 0.1"/>
+      </geometry>
+      <material name="Steel Blue"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.05" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.3 0.3 0.1"/>
+      </geometry>
+    </collision>
+    <xacro:inertial_box mass="0.5" x="0.3" y="0.3" z="0.15">
+      <origin xyz="0.15 0 0.075" rpy="0 0 0"/>
+      </xacro:inertial_box>
+  </link>
+
+  <!-- Front Left Wheel -->
+  <joint name="front_left_wheel_joint" type="continuous">
+    <parent link="chassis"/>
+    <child link="front_left_wheel"/>
+    <origin xyz="0.2 0.2 0.05" rpy="-${pi/2} 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="front_left_wheel">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.05" radius="0.05"/>
+      </geometry>
+      <material name="soft blue"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="-${pi/2} 0 0"/>
+      <geometry>
+        <cylinder length="0.05" radius="0.05"/>
+      </geometry>
+    </collision>
+    <xacro:inertial_cylinder mass="0.1" length="0.05" radius="0.05">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:inertial_cylinder>
+  </link>
+
+  <!-- Front Right Wheel -->
+  <joint name="front_right_wheel_joint" type="continuous">
+    <parent link="chassis"/>
+    <child link="front_right_wheel"/>
+    <origin xyz="0.2 -0.2 0.05" rpy="${pi/2} 0 0"/>
+    <axis xyz="0 0 -1"/>
+  </joint>
+
+  <link name="front_right_wheel">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.05" radius="0.05"/>
+      </geometry>
+      <material name="Pastel Pink"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+      <geometry>
+        <cylinder length="0.05" radius="0.05"/>
+      </geometry>
+    </collision>ฃ<xacro:inertial_cylinder mass="0.1" length="0.05" radius="0.05">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:inertial_cylinder>
+  </link>
+
+  <!-- Rear Left Wheel -->
+  <joint name="rear_left_wheel_joint" type="continuous">
+    <parent link="chassis"/>
+    <child link="rear_left_wheel"/>
+    <origin xyz="-0.2 0.2 0.05" rpy="-${pi/2} 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="rear_left_wheel">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.05" radius="0.05"/>
+      </geometry>
+      <material name="Lavender Purple"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="-${pi/2} 0 0"/>
+      <geometry>
+        <cylinder length="0.05" radius="0.05"/>
+      </geometry>
+    </collision>
+    <xacro:inertial_cylinder mass="0.1" length="0.05" radius="0.05">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:inertial_cylinder>
+  </link>
+
+  <!-- Rear Right Wheel -->
+  <joint name="rear_right_wheel_joint" type="continuous">
+    <parent link="chassis"/>
+    <child link="rear_right_wheel"/>
+    <origin xyz="-0.2 -0.2 0.05" rpy="${pi/2} 0 0"/>
+    <axis xyz="0 0 -1"/>
+  </joint>
+
+  <link name="rear_right_wheel">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.05" radius="0.05"/>
+      </geometry>
+      <material name="yellow"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+      <geometry>
+        <cylinder length="0.05" radius="0.05"/>
+      </geometry>
+    </collision>
+    <xacro:inertial_cylinder mass="0.1" length="0.05" radius="0.05">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:inertial_cylinder>
+  <gazebo reference="caster_wheel">
+    <material>Gazebo/Black</material>
+    <mu1 value="0.5"/>
+    <mu2 value="0.5"/>
+  </gazebo>
+  </link>
+
+
+</robot>
